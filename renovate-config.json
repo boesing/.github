@@ -1,0 +1,38 @@
+{
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "description": "Default configuration for my personal repositories",
+    "extends": [
+        ":dependencyDashboard",
+        ":ignoreModulesAndTests",
+        ":automergeMinor",
+        ":automergeBranch",
+        ":rebaseStalePrs",
+        ":semanticCommitsDisabled",
+        ":separateMajorReleases",
+        ":combinePatchMinorReleases",
+        ":enableVulnerabilityAlerts",
+        ":timezone(Europe/Berlin)",
+        ":gitSignOff",
+        ":label(dependency update)",
+        "group:allNonMajor"
+    ],
+    "commitBodyTable": true,
+    "lockFileMaintenance": {"enabled": true, "extends": ["schedule:monthly"]},
+    "platformAutomerge": true,
+    "rangeStrategy": "replace",
+    "rollbackPrs": true,
+    "packageRules": [
+        {"matchDepTypes": ["require"], "rangeStrategy": "widen"},
+        {
+            "matchPackageNames": ["php"],
+            "allowedVersions": "^8.0",
+            "extends": [":automergeDisabled", ":automergePr"],
+            "ignoreUnstable": false,
+            "groupName": "PHP"
+        }
+    ],
+    "vulnerabilityAlerts": {
+        "extends": [":automergeDisabled", ":automergePr", ":labels(security)"],
+        "rangeStrategy": "bump"
+    }
+}
